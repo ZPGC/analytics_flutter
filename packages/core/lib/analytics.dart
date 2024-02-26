@@ -328,10 +328,7 @@ class Analytics with ClientMethods {
 
       if (isAppInstalled != true) {
         prefs.setBool(appInstalledFlag, true);
-        track("Application Installed", properties: {
-          "version": context.app.version,
-          "build": context.app.build,
-        });
+        track("Application Installed", properties: {});
       } else if (context.app.version != previousContext?.app.version) {
         track("Application Updated", properties: {
           "version": context.app.version,
@@ -342,11 +339,7 @@ class Analytics with ClientMethods {
       }
     }
 
-    track("Application Opened", properties: {
-      "from_background": false,
-      "version": context.app.version,
-      "build": context.app.build,
-    });
+    track("Application Opened", properties: {});
   }
 
   Future _fetchSettings() async {
@@ -403,13 +396,7 @@ class Analytics with ClientMethods {
           nextAppState == AppStatus.foreground) {
         final context = await state.context.state;
         track("Application Opened",
-            properties: priorAppState == AppStatus.background
-                ? {}
-                : {
-                    "from_background": true,
-                    "version": context?.app.version,
-                    "build": context?.app.build
-                  });
+            properties: {});
         await _fetchSettings();
       } else if ((priorAppState == null ||
               priorAppState == AppStatus.foreground) &&
