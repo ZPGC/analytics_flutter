@@ -19,7 +19,7 @@ class InjectUserInfo extends PlatformPlugin {
       //     : userInfo.userTraits;
       analytics!.state.userInfo.setState(UserInfo(
           event.anonymousId ?? userInfo.anonymousId,
-          userId: event.userId.isEmpty && userInfo.userId.isEmpty ? null : event.userId ?? userInfo.userId,
+          userId: event.userId != null || userInfo.userId ? event.userId.isEmpty && userInfo.userId.isEmpty ? null : event.userId ?? userInfo.userId : null,
           userTraits: identityEvent.traits,
           groupTraits: identityEvent.groupTraits));
       // identityEvent.traits = mergedTraits;
