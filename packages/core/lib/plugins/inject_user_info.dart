@@ -11,19 +11,18 @@ class InjectUserInfo extends PlatformPlugin {
     event.anonymousId = userInfo.anonymousId;
     if (event.type == EventType.identify) {
       final identityEvent = event as IdentifyEvent;
-      final mergedTraits = identityEvent.traits != null
-          ? (userInfo.userTraits != null
-              ? mergeUserTraits(identityEvent.traits as UserTraits,
-                  userInfo.userTraits as UserTraits)
-              : identityEvent.traits)
-          : userInfo.userTraits;
+      // final mergedTraits = identityEvent.traits != null
+      //     ? (userInfo.userTraits != null
+      //         ? mergeUserTraits(identityEvent.traits as UserTraits,
+      //             userInfo.userTraits as UserTraits)
+      //         : identityEvent.traits)
+      //     : userInfo.userTraits;
       analytics!.state.userInfo.setState(UserInfo(
           event.anonymousId ?? userInfo.anonymousId,
-          userId: event.userId ?? userInfo.userId,
-          userTraits: mergedTraits,
-          groupTraits: userInfo.groupTraits));
-
-      identityEvent.traits = mergedTraits;
+          userId: event.userId.isEmpty && userInfo.userId.isEmpty ? null : event.userId ?? userInfo.userId,
+          userTraits: identityEvent.traits,
+          groupTraits: identityEvent.groupTraits));
+      // identityEvent.traits = mergedTraits;
     } else if (event.type == EventType.alias) {
       final previousAnonId = userInfo.anonymousId;
       final previousUserId = userInfo.userId;
