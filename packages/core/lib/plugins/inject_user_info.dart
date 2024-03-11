@@ -23,8 +23,6 @@ class InjectUserInfo extends PlatformPlugin {
           userTraits: mergedTraits,
           groupTraits: userInfo.groupTraits));
 
-          if(event.userId.isEmpty)
-
       identityEvent.traits = mergedTraits;
     } else if (event.type == EventType.alias) {
       final previousAnonId = userInfo.anonymousId;
