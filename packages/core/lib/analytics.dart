@@ -391,19 +391,19 @@ class Analytics with ClientMethods {
     final priorAppState = _appState;
     _appState = nextAppState;
 
-    // if (state.configuration.state.trackApplicationLifecycleEvents) {
+    if (state.configuration.state.trackApplicationLifecycleEvents) {
     //   if ((priorAppState == AppStatus.background) &&
     //       nextAppState == AppStatus.foreground) {
     //     final context = await state.context.state;
     //     track("Application Opened",
     //         properties: {});
     //     await _fetchSettings();
-    //   } else if ((priorAppState == null ||
-    //           priorAppState == AppStatus.foreground) &&
-    //       nextAppState == AppStatus.background) {
-    //     track("Application Backgrounded");
-    //   }
-    // }
+    //   } else 
+      if ((priorAppState == null || priorAppState == AppStatus.foreground) &&
+          nextAppState == AppStatus.background) {
+        track("Application Backgrounded");
+      }
+    }
   }
 }
 
