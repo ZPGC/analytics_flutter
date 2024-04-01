@@ -322,14 +322,15 @@ class Analytics with ClientMethods {
     // Set a flag on the first launch to track installations/updates
     // We ignore this on web
     if (!kIsWeb) {
-      const appInstalledFlag = "segment_app_installed";
-      final prefs = await SharedPreferences.getInstance();
-      final isAppInstalled = prefs.getBool(appInstalledFlag);
+      // const appInstalledFlag = "segment_app_installed";
+      // final prefs = await SharedPreferences.getInstance();
+      // final isAppInstalled = prefs.getBool(appInstalledFlag);
 
-      if (isAppInstalled != true) {
-        prefs.setBool(appInstalledFlag, true);
-        track("Application Installed", properties: {});
-      } else if (context.app.version != previousContext?.app.version) {
+      // if (isAppInstalled != true) {
+      //   prefs.setBool(appInstalledFlag, true);
+      //   track("Application Installed", properties: {});
+      // } else 
+        if (context.app.version != previousContext?.app.version) {
         track("Application Updated", properties: {
           "version": context.app.version,
           "build": context.app.build,
